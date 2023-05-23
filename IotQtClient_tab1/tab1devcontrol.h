@@ -1,26 +1,30 @@
-#ifndef LEDKEYWIDGET_H
-#define LEDKEYWIDGET_H
+#ifndef TAB1DEVCONTROL_H
+#define TAB1DEVCONTROL_H
 
 #include <QWidget>
 #include <QTimer>
 #include "keyled.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class LedkeyWidget; }
+namespace Ui { class Tab1DevControl; }
 QT_END_NAMESPACE
 
-class LedkeyWidget : public QWidget
+class Tab1DevControl : public QWidget
 {
     Q_OBJECT
 
 public:
-    LedkeyWidget(QWidget *parent = nullptr);
-    ~LedkeyWidget();
+    Tab1DevControl(QWidget *parent = nullptr);
+    ~Tab1DevControl();
+    KeyLed* getKeyLed();
 
 private:
-    Ui::LedkeyWidget *ui;
+    Ui::Tab1DevControl *ui;
     KeyLed *pKeyled;
     QTimer *pQtimer;
+
+public slots:
+    void slotDialSetValue(int);
 
 private slots:
     void slotKeyCheckBoxUpdate(int);
@@ -28,4 +32,4 @@ private slots:
     void slotTimerStart(bool);
     void slotTimerValueChange(QString);
 };
-#endif // LEDKEYWIDGET_H
+#endif // Tab1DevControl_H

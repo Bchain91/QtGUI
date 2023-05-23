@@ -1,10 +1,10 @@
-#include "ledkeywidget.h"
-#include "ui_ledkeywidget.h"
+#include "tab1devcontrol.h"
+#include "ui_tab1devcontrol.h"
 
 
-LedkeyWidget::LedkeyWidget(QWidget *parent)
+Tab1DevControl::Tab1DevControl(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::LedkeyWidget)
+    , ui(new Ui::Tab1DevControl)
 {
     ui->setupUi(this);
 
@@ -20,7 +20,7 @@ LedkeyWidget::LedkeyWidget(QWidget *parent)
     connect(ui->pPBappQuit, SIGNAL(clicked()),qApp,SLOT(quit()));
 }
 
-void LedkeyWidget::slotTimerStart(bool check)
+void Tab1DevControl::slotTimerStart(bool check)
 {
     if(check)
     {
@@ -34,7 +34,7 @@ void LedkeyWidget::slotTimerStart(bool check)
     }
 }
 
-void LedkeyWidget::slotSetValueDial()
+void Tab1DevControl::slotSetValueDial()
 {
     int value = ui->pDialLed->value();
     if(value >= ui->pDialLed->maximum())
@@ -44,7 +44,7 @@ void LedkeyWidget::slotSetValueDial()
     ui->pDialLed->setValue(value);
 }
 
-void LedkeyWidget::slotTimerValueChange(QString strValue)
+void Tab1DevControl::slotTimerValueChange(QString strValue)
 {
     if(pQtimer->isActive())
     {
@@ -53,7 +53,7 @@ void LedkeyWidget::slotTimerValueChange(QString strValue)
     }
 }
 
-void LedkeyWidget::slotKeyCheckBoxUpdate(int key)
+void Tab1DevControl::slotKeyCheckBoxUpdate(int key)
 {
     static int lcdData = 0;
     lcdData ^= (0x01 << (key-1));
@@ -101,7 +101,16 @@ void LedkeyWidget::slotKeyCheckBoxUpdate(int key)
     }
 }
 
-LedkeyWidget::~LedkeyWidget()
+KeyLed * Tab1DevControl::getKeyLed()
+{
+    return pKeyled;
+}
+
+void Tab1DevControl::slotDialSetValue(int value)
+{
+    ui->pDialLed->setValue(value);
+}
+Tab1DevControl::~Tab1DevControl()
 {
     delete ui;
 }
