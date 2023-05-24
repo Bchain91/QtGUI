@@ -64,8 +64,32 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QTableWidget" name="pTableWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>542</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="lineWidth">
+        <number>1</number>
+       </property>
+       <property name="textElideMode">
+        <enum>Qt::ElideRight</enum>
+       </property>
+       <attribute name="horizontalHeaderCascadingSectionResizes">
+        <bool>false</bool>
+       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>170</number>
+        <number>130</number>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>30</number>
        </attribute>
        <column>
         <property name="text">
@@ -80,6 +104,16 @@
        <column>
         <property name="text">
          <string>조도</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>온도</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>습도</string>
         </property>
        </column>
       </widget>

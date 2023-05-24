@@ -17,7 +17,9 @@ Tab6Database::Tab6Database(QWidget *parent) :
     QString query = "CREATE TABLE temp_db ("
                     "id integer primary key,"
                     "date DATETIME,"
-                    "illu VARCHAR(10))";
+                    "illu VARCHAR(10),"
+                    "temp VARCHAR(10),"
+                    "humi VARCHAR(10))";
     QSqlQuery qry;
     if(!qry.exec(query))
     {
@@ -46,10 +48,12 @@ void Tab6Database::slotTab6RecvData(QString recvData)
     recvData.replace("]","@");
     QStringList qlist = recvData.split("@");
     QString illu = qlist[3];   //조도
+    QString temp = qlist[4];
+    QString humi = qlist[5];
 
-    query = "insert into temp_db(date,illu) values('" +
+    query = "insert into temp_db(date,illu,temp,humi) values('" +
             dateTime.toString("yy/MM/dd hh:mm:ss") +
-            "', '" + illu + "')";
+            "', '" + illu + "','" + temp + "','" + humi +"')";
     if(qry.exec(query))
     {
 //        qDebug() << "insert Ok";
@@ -78,13 +82,19 @@ void Tab6Database::slotSearchDb()
            QTableWidgetItem *id = new QTableWidgetItem();
            QTableWidgetItem *date = new QTableWidgetItem();
            QTableWidgetItem *illu = new QTableWidgetItem();
+           QTableWidgetItem *temp = new QTableWidgetItem();
+           QTableWidgetItem *humi = new QTableWidgetItem();
 
            id->setText(qry.value("id").toString());
            date->setText(qry.value("date").toString());
            illu->setText(qry.value("illu").toString());
+           temp->setText(qry.value("temp").toString());
+           humi->setText(qry.value("humi").toString());
            ui->pTableWidget->setItem(rowCount-1,0,id);
            ui->pTableWidget->setItem(rowCount-1,1,date);
            ui->pTableWidget->setItem(rowCount-1,2,illu);
+           ui->pTableWidget->setItem(rowCount-1,3,temp);
+           ui->pTableWidget->setItem(rowCount-1,4,humi);
         }
     }
 }
